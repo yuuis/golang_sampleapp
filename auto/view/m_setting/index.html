@@ -1,0 +1,191 @@
+{{template "headerTpl" dict "Title" "Goサンプル" "SubTitle" "MSetting"}}
+<section>
+{{template "datatablesTpl" dict "Id" "list" "Length" "16" "Order" "1" "AscDesc" "desc"}}
+<script type="text/javascript" charset="utf-8">
+function funcGoRegister(Sid) {
+	$("#SidForRegister").val(Sid);
+	$("#MSettingRegisterForm").submit();
+}
+</script>
+<h3>検索ページ</h3>
+<h5 class="bg-secondary text-white p-2">検索条件</h5>
+<div class="container">
+  {{template "formTpl" dict "Action" "/autosample/MSetting" "Id" "MSettingForm" "Mode" "search" "Token" .Token}}
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">ビシネスID</div>
+    <div class="col-7 m-1">
+      <input type="text" name="business_id" value="{{.Form.BusinessId}}" id="BusinessId" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "BusinessId" "Marking" "BusinessId"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">ユーザID</div>
+    <div class="col-7 m-1">
+      <input type="text" name="m_user_sid" value="{{.Form.MUserSid}}" id="MUserSid" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "MUserSid" "Marking" "MUserSid"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">ショップマスタSID</div>
+    <div class="col-7 m-1">
+      <input type="text" name="m_shop_sid" value="{{.Form.MShopSid}}" id="MShopSid" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "MShopSid" "Marking" "MShopSid"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">設定キー</div>
+    <div class="col-7 m-1">
+      <input type="text" name="key" value="{{.Form.Key}}" id="Key" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "Key" "Marking" "Key"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">設定内容（JSON）</div>
+    <div class="col-7 m-1">
+      <input type="text" name="context" value="{{.Form.Context}}" id="Context" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "Context" "Marking" "Context"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">稼働状況（true:稼働中）</div>
+    <div class="col-7 m-1">
+      <input type="text" name="active_flag" value="{{.Form.ActiveFlag}}" id="ActiveFlag" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "ActiveFlag" "Marking" "ActiveFlag"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">URL一致パターン　１：完全　２：前方一致</div>
+    <div class="col-7 m-1">
+      <input type="text" name="url_matching_pattern" value="{{.Form.UrlMatchingPattern}}" id="UrlMatchingPattern" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "UrlMatchingPattern" "Marking" "UrlMatchingPattern"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">有効無効　１：有効　２：無効</div>
+    <div class="col-7 m-1">
+      <input type="text" name="status" value="{{.Form.Status}}" id="Status" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "Status" "Marking" "Status"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">スクリーンショット取得日時</div>
+    <div class="col-7 m-1">
+      <input type="text" name="screenshot_get_time" value="{{.Form.ScreenshotGetTime}}" id="ScreenshotGetTime" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "ScreenshotGetTime" "Marking" "ScreenshotGetTime"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">定期後商品コード</div>
+    <div class="col-7 m-1">
+      <input type="text" name="regularly_item_code" value="{{.Form.RegularlyItemCode}}" id="RegularlyItemCode" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "RegularlyItemCode" "Marking" "RegularlyItemCode"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">ソート順</div>
+    <div class="col-7 m-1">
+      <input type="text" name="sort_order" value="{{.Form.SortOrder}}" id="SortOrder" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "SortOrder" "Marking" "SortOrder"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">削除フラグ（true:削除済み）</div>
+    <div class="col-7 m-1">
+      <input type="text" name="delete_flag" value="{{.Form.DeleteFlag}}" id="DeleteFlag" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "DeleteFlag" "Marking" "DeleteFlag"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">登録者ID</div>
+    <div class="col-7 m-1">
+      <input type="text" name="create_user_id" value="{{.Form.CreateUserId}}" id="CreateUserId" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "CreateUserId" "Marking" "CreateUserId"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">最終更新者ID</div>
+    <div class="col-7 m-1">
+      <input type="text" name="update_user_id" value="{{.Form.UpdateUserId}}" id="UpdateUserId" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "UpdateUserId" "Marking" "UpdateUserId"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">登録日時</div>
+    <div class="col-7 m-1">
+      <input type="text" name="create_time" value="{{.Form.CreateTime}}" id="CreateTime" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "CreateTime" "Marking" "CreateTime"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">最終更新日時</div>
+    <div class="col-7 m-1">
+      <input type="text" name="update_time" value="{{.Form.UpdateTime}}" id="UpdateTime" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "UpdateTime" "Marking" "UpdateTime"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="offset-sm-2 col-sm-10">
+      <button type="submit" class="btn btn-outline-primary col-7 center-block" id="searchButton">検索</button>
+      <button type="button" class="btn btn-outline-success col-3 center-block" id="registerButton" onclick="funcGoRegister('');">新規作成</button>
+    </div>
+  </div>
+  </form>
+</div>
+<hr/>
+<table class="table" id="list">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">&nbsp;</th>
+      <th scope="col">ビシネスID</th>
+      <th scope="col">ユーザID</th>
+      <th scope="col">ショップマスタSID</th>
+      <th scope="col">設定キー</th>
+      <th scope="col">設定内容（JSON）</th>
+      <th scope="col">稼働状況（true:稼働中）</th>
+      <th scope="col">URL一致パターン　１：完全　２：前方一致</th>
+      <th scope="col">有効無効　１：有効　２：無効</th>
+      <th scope="col">スクリーンショット取得日時</th>
+      <th scope="col">定期後商品コード</th>
+      <th scope="col">ソート順</th>
+      <th scope="col">削除フラグ（true:削除済み）</th>
+      <th scope="col">登録者ID</th>
+      <th scope="col">最終更新者ID</th>
+      <th scope="col">登録日時</th>
+      <th scope="col">最終更新日時</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{range .List}}
+    <tr>
+      <td><a href="javascript: onclick=funcGoRegister('{{.Sid}}');">{{.Sid}}</a></td>
+      <td>{{.BusinessId}}</td>
+      <td>{{.MUserSid}}</td>
+      <td>{{.MShopSid}}</td>
+      <td>{{.Key}}</td>
+      <td>{{.Context}}</td>
+      <td>{{.ActiveFlag}}</td>
+      <td>{{.UrlMatchingPattern}}</td>
+      <td>{{.Status}}</td>
+      <td>{{.ScreenshotGetTime}}</td>
+      <td>{{.RegularlyItemCode}}</td>
+      <td>{{.SortOrder}}</td>
+      <td>{{.DeleteFlag}}</td>
+      <td>{{.CreateUserId}}</td>
+      <td>{{.UpdateUserId}}</td>
+      <td>{{.CreateTime}}</td>
+      <td>{{.UpdateTime}}</td>
+    </tr>
+    {{end}}
+  </tbody>
+</table>
+<hr/>
+
+
+</section>
+
+{{template "formTpl" dict "Action" "/autosample/MSetting/register" "Id" "MSettingRegisterForm" "Mode" "show" "Token" .Token}}
+<input type="hidden" name="sid" id="SidForRegister"/>
+</form>
+
+{{template "footerTpl" .}}
+

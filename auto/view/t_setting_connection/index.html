@@ -1,0 +1,164 @@
+{{template "headerTpl" dict "Title" "Goサンプル" "SubTitle" "TSettingConnection"}}
+<section>
+{{template "datatablesTpl" dict "Id" "list" "Length" "13" "Order" "1" "AscDesc" "desc"}}
+<script type="text/javascript" charset="utf-8">
+function funcGoRegister(MSettingSid) {
+	$("#MSettingSidForRegister").val(MSettingSid);
+	$("#TSettingConnectionRegisterForm").submit();
+}
+</script>
+<h3>検索ページ</h3>
+<h5 class="bg-secondary text-white p-2">検索条件</h5>
+<div class="container">
+  {{template "formTpl" dict "Action" "/autosample/TSettingConnection" "Id" "TSettingConnectionForm" "Mode" "search" "Token" .Token}}
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">振り分け踏んだ日時</div>
+    <div class="col-7 m-1">
+      <input type="text" name="last_compared_time" value="{{.Form.LastComparedTime}}" id="LastComparedTime" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "LastComparedTime" "Marking" "LastComparedTime"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">クロスドメイン対応タグ（ショップ側）踏んだ日時</div>
+    <div class="col-7 m-1">
+      <input type="text" name="last_xd_shop_time" value="{{.Form.LastXdShopTime}}" id="LastXdShopTime" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "LastXdShopTime" "Marking" "LastXdShopTime"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">クロスドメイン対応タグ（カート側）踏んだ日時</div>
+    <div class="col-7 m-1">
+      <input type="text" name="last_xd_cart_time" value="{{.Form.LastXdCartTime}}" id="LastXdCartTime" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "LastXdCartTime" "Marking" "LastXdCartTime"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">コンバージョンタグ踏んだ日時</div>
+    <div class="col-7 m-1">
+      <input type="text" name="last_convertion_time" value="{{.Form.LastConvertionTime}}" id="LastConvertionTime" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "LastConvertionTime" "Marking" "LastConvertionTime"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">振り分け踏んだ日時(SP)</div>
+    <div class="col-7 m-1">
+      <input type="text" name="last_compared_time_sp" value="{{.Form.LastComparedTimeSp}}" id="LastComparedTimeSp" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "LastComparedTimeSp" "Marking" "LastComparedTimeSp"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">クロスドメイン対応タグ（ショップ側）踏んだ日時(SP)</div>
+    <div class="col-7 m-1">
+      <input type="text" name="last_xd_shop_time_sp" value="{{.Form.LastXdShopTimeSp}}" id="LastXdShopTimeSp" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "LastXdShopTimeSp" "Marking" "LastXdShopTimeSp"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">クロスドメイン対応タグ（カート側）踏んだ日時(SP)</div>
+    <div class="col-7 m-1">
+      <input type="text" name="last_xd_cart_time_sp" value="{{.Form.LastXdCartTimeSp}}" id="LastXdCartTimeSp" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "LastXdCartTimeSp" "Marking" "LastXdCartTimeSp"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">コンバージョンタグ踏んだ日時(SP)</div>
+    <div class="col-7 m-1">
+      <input type="text" name="last_convertion_time_sp" value="{{.Form.LastConvertionTimeSp}}" id="LastConvertionTimeSp" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "LastConvertionTimeSp" "Marking" "LastConvertionTimeSp"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">削除フラグ（true:削除済み）</div>
+    <div class="col-7 m-1">
+      <input type="text" name="delete_flag" value="{{.Form.DeleteFlag}}" id="DeleteFlag" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "DeleteFlag" "Marking" "DeleteFlag"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">登録者ID</div>
+    <div class="col-7 m-1">
+      <input type="text" name="create_user_id" value="{{.Form.CreateUserId}}" id="CreateUserId" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "CreateUserId" "Marking" "CreateUserId"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">最終更新者ID</div>
+    <div class="col-7 m-1">
+      <input type="text" name="update_user_id" value="{{.Form.UpdateUserId}}" id="UpdateUserId" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "UpdateUserId" "Marking" "UpdateUserId"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">登録日</div>
+    <div class="col-7 m-1">
+      <input type="text" name="create_time" value="{{.Form.CreateTime}}" id="CreateTime" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "CreateTime" "Marking" "CreateTime"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">最終更新日</div>
+    <div class="col-7 m-1">
+      <input type="text" name="update_time" value="{{.Form.UpdateTime}}" id="UpdateTime" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "UpdateTime" "Marking" "UpdateTime"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="offset-sm-2 col-sm-10">
+      <button type="submit" class="btn btn-outline-primary col-7 center-block" id="searchButton">検索</button>
+      <button type="button" class="btn btn-outline-success col-3 center-block" id="registerButton" onclick="funcGoRegister('');">新規作成</button>
+    </div>
+  </div>
+  </form>
+</div>
+<hr/>
+<table class="table" id="list">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">&nbsp;</th>
+      <th scope="col">振り分け踏んだ日時</th>
+      <th scope="col">クロスドメイン対応タグ（ショップ側）踏んだ日時</th>
+      <th scope="col">クロスドメイン対応タグ（カート側）踏んだ日時</th>
+      <th scope="col">コンバージョンタグ踏んだ日時</th>
+      <th scope="col">振り分け踏んだ日時(SP)</th>
+      <th scope="col">クロスドメイン対応タグ（ショップ側）踏んだ日時(SP)</th>
+      <th scope="col">クロスドメイン対応タグ（カート側）踏んだ日時(SP)</th>
+      <th scope="col">コンバージョンタグ踏んだ日時(SP)</th>
+      <th scope="col">削除フラグ（true:削除済み）</th>
+      <th scope="col">登録者ID</th>
+      <th scope="col">最終更新者ID</th>
+      <th scope="col">登録日</th>
+      <th scope="col">最終更新日</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{range .List}}
+    <tr>
+      <td><a href="javascript: onclick=funcGoRegister('{{.MSettingSid}}');">{{.MSettingSid}}</a></td>
+      <td>{{.LastComparedTime}}</td>
+      <td>{{.LastXdShopTime}}</td>
+      <td>{{.LastXdCartTime}}</td>
+      <td>{{.LastConvertionTime}}</td>
+      <td>{{.LastComparedTimeSp}}</td>
+      <td>{{.LastXdShopTimeSp}}</td>
+      <td>{{.LastXdCartTimeSp}}</td>
+      <td>{{.LastConvertionTimeSp}}</td>
+      <td>{{.DeleteFlag}}</td>
+      <td>{{.CreateUserId}}</td>
+      <td>{{.UpdateUserId}}</td>
+      <td>{{.CreateTime}}</td>
+      <td>{{.UpdateTime}}</td>
+    </tr>
+    {{end}}
+  </tbody>
+</table>
+<hr/>
+
+
+</section>
+
+{{template "formTpl" dict "Action" "/autosample/TSettingConnection/register" "Id" "TSettingConnectionRegisterForm" "Mode" "show" "Token" .Token}}
+<input type="hidden" name="m_setting_sid" id="MSettingSidForRegister"/>
+</form>
+
+{{template "footerTpl" .}}
+

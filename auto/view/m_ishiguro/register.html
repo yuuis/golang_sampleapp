@@ -1,0 +1,78 @@
+{{template "headerTpl" dict "Title" "Goサンプル" "SubTitle" "MIshiguro"}}
+<section>
+<script type="text/javascript" charset="utf-8">
+function funcBack() {
+	$("#MIshiguroFormForBack").submit();
+}
+</script>
+<h3>検索ページ</h3>
+<h5 class="bg-secondary text-white p-2">登録変更</h5>
+<div class="container">
+  {{template "formTpl" dict "Action" "/autosample/MIshiguro/register" "Id" "MIshiguroFormRegister" "Mode" "register" "Token" .Token}}
+  {{template "completeTpl" dict "Status" .Status}}
+  <input type="hidden" name="sid" value="{{.Form.Sid}}" />
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">お名前<span class="text-danger">※</span></div>
+    <div class="col-7 m-1">
+      <input type="text" name="name" value="{{.Form.Name}}" id="Name" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "Name" "Marking" "Name"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">コード<span class="text-danger">※</span></div>
+    <div class="col-7 m-1">
+      <input type="text" name="code" value="{{.Form.Code}}" id="Code" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "Code" "Marking" "Code"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">削除フラグ（true:削除済み）<span class="text-danger">※</span></div>
+    <div class="col-7 m-1">
+      <input type="text" name="delete_flag" value="{{.Form.DeleteFlag}}" id="DeleteFlag" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "DeleteFlag" "Marking" "DeleteFlag"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">登録者ID<span class="text-danger">※</span></div>
+    <div class="col-7 m-1">
+      <input type="text" name="create_user_id" value="{{.Form.CreateUserId}}" id="CreateUserId" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "CreateUserId" "Marking" "CreateUserId"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">最終更新者ID<span class="text-danger">※</span></div>
+    <div class="col-7 m-1">
+      <input type="text" name="update_user_id" value="{{.Form.UpdateUserId}}" id="UpdateUserId" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "UpdateUserId" "Marking" "UpdateUserId"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">登録日時<span class="text-danger">※</span></div>
+    <div class="col-7 m-1">
+      <input type="text" name="create_time" value="{{.Form.CreateTime}}" id="CreateTime" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "CreateTime" "Marking" "CreateTime"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">最終更新日時<span class="text-danger">※</span></div>
+    <div class="col-7 m-1">
+      <input type="text" name="update_time" value="{{.Form.UpdateTime}}" id="UpdateTime" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "UpdateTime" "Marking" "UpdateTime"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="offset-sm-2 col-sm-10">
+      <button type="button" class="btn btn-outline-secondary col-4 center-block" id="backButton" onclick="funcBack();">戻る</button>
+      <button type="submit" class="btn btn-outline-success col-4 center-block" id="registerButton">登録</button>
+    </div>
+  </div>
+  </form>
+</div>
+
+</section>
+
+{{template "formTpl" dict "Action" "/autosample/MIshiguro" "Id" "MIshiguroFormForBack" "Mode" "back" "Token" .Token}}
+</form>
+
+{{template "footerTpl" .}}
+

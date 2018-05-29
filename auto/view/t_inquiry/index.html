@@ -1,0 +1,155 @@
+{{template "headerTpl" dict "Title" "Goサンプル" "SubTitle" "TInquiry"}}
+<section>
+{{template "datatablesTpl" dict "Id" "list" "Length" "12" "Order" "1" "AscDesc" "desc"}}
+<script type="text/javascript" charset="utf-8">
+function funcGoRegister(Sid) {
+	$("#SidForRegister").val(Sid);
+	$("#TInquiryRegisterForm").submit();
+}
+</script>
+<h3>検索ページ</h3>
+<h5 class="bg-secondary text-white p-2">検索条件</h5>
+<div class="container">
+  {{template "formTpl" dict "Action" "/autosample/TInquiry" "Id" "TInquiryForm" "Mode" "search" "Token" .Token}}
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">ユーザーマスタSID</div>
+    <div class="col-7 m-1">
+      <input type="text" name="m_user_sid" value="{{.Form.MUserSid}}" id="MUserSid" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "MUserSid" "Marking" "MUserSid"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">お問い合わせ日時</div>
+    <div class="col-7 m-1">
+      <input type="text" name="inquiry_date" value="{{.Form.InquiryDate}}" id="InquiryDate" class="form-control date"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "InquiryDate" "Marking" "InquiryDate"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">お問い合わせ分類コード</div>
+    <div class="col-7 m-1">
+      <input type="text" name="category_code" value="{{.Form.CategoryCode}}" id="CategoryCode" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "CategoryCode" "Marking" "CategoryCode"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">顧客電話番号</div>
+    <div class="col-7 m-1">
+      <input type="text" name="tel" value="{{.Form.Tel}}" id="Tel" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "Tel" "Marking" "Tel"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">顧客名</div>
+    <div class="col-7 m-1">
+      <input type="text" name="name" value="{{.Form.Name}}" id="Name" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "Name" "Marking" "Name"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">メールアドレス（顧客）</div>
+    <div class="col-7 m-1">
+      <input type="text" name="mail_address" value="{{.Form.MailAddress}}" id="MailAddress" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "MailAddress" "Marking" "MailAddress"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">問い合わせ内容</div>
+    <div class="col-7 m-1">
+      <input type="text" name="inquiry_text" value="{{.Form.InquiryText}}" id="InquiryText" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "InquiryText" "Marking" "InquiryText"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">削除フラグ（true:削除済み）</div>
+    <div class="col-7 m-1">
+      <input type="text" name="delete_flag" value="{{.Form.DeleteFlag}}" id="DeleteFlag" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "DeleteFlag" "Marking" "DeleteFlag"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">登録者ID</div>
+    <div class="col-7 m-1">
+      <input type="text" name="create_user_id" value="{{.Form.CreateUserId}}" id="CreateUserId" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "CreateUserId" "Marking" "CreateUserId"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">最終更新者ID</div>
+    <div class="col-7 m-1">
+      <input type="text" name="update_user_id" value="{{.Form.UpdateUserId}}" id="UpdateUserId" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "UpdateUserId" "Marking" "UpdateUserId"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">登録日</div>
+    <div class="col-7 m-1">
+      <input type="text" name="create_time" value="{{.Form.CreateTime}}" id="CreateTime" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "CreateTime" "Marking" "CreateTime"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">最終更新日</div>
+    <div class="col-7 m-1">
+      <input type="text" name="update_time" value="{{.Form.UpdateTime}}" id="UpdateTime" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "UpdateTime" "Marking" "UpdateTime"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="offset-sm-2 col-sm-10">
+      <button type="submit" class="btn btn-outline-primary col-7 center-block" id="searchButton">検索</button>
+      <button type="button" class="btn btn-outline-success col-3 center-block" id="registerButton" onclick="funcGoRegister('');">新規作成</button>
+    </div>
+  </div>
+  </form>
+</div>
+<hr/>
+<table class="table" id="list">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">&nbsp;</th>
+      <th scope="col">ユーザーマスタSID</th>
+      <th scope="col">お問い合わせ日時</th>
+      <th scope="col">お問い合わせ分類コード</th>
+      <th scope="col">顧客電話番号</th>
+      <th scope="col">顧客名</th>
+      <th scope="col">メールアドレス（顧客）</th>
+      <th scope="col">問い合わせ内容</th>
+      <th scope="col">削除フラグ（true:削除済み）</th>
+      <th scope="col">登録者ID</th>
+      <th scope="col">最終更新者ID</th>
+      <th scope="col">登録日</th>
+      <th scope="col">最終更新日</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{range .List}}
+    <tr>
+      <td><a href="javascript: onclick=funcGoRegister('{{.Sid}}');">{{.Sid}}</a></td>
+      <td>{{.MUserSid}}</td>
+      <td>{{.InquiryDate}}</td>
+      <td>{{.CategoryCode}}</td>
+      <td>{{.Tel}}</td>
+      <td>{{.Name}}</td>
+      <td>{{.MailAddress}}</td>
+      <td>{{.InquiryText}}</td>
+      <td>{{.DeleteFlag}}</td>
+      <td>{{.CreateUserId}}</td>
+      <td>{{.UpdateUserId}}</td>
+      <td>{{.CreateTime}}</td>
+      <td>{{.UpdateTime}}</td>
+    </tr>
+    {{end}}
+  </tbody>
+</table>
+<hr/>
+
+
+</section>
+
+{{template "formTpl" dict "Action" "/autosample/TInquiry/register" "Id" "TInquiryRegisterForm" "Mode" "show" "Token" .Token}}
+<input type="hidden" name="sid" id="SidForRegister"/>
+</form>
+
+{{template "footerTpl" .}}
+

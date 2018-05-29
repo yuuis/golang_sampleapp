@@ -1,0 +1,36 @@
+{{template "headerTpl" dict "Title" "Goサンプル" "SubTitle" "リストポストテスト"}}
+    <form action="/listposttest/register" method="POST">
+      Redis Key:<input type="text" name="redis_key" value="{{.RedisKey}}"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "RedisKey"}}
+      &nbsp;&nbsp;
+      Redis Value:<input type="text" name="redis_value" value="{{.RedisValue}}"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "RedisValue"}}
+      <br/>
+      <br/>
+      Memcached Key:<input type="text" name="memcache_key" value="{{.MemcacheKey}}"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "MemcacheKey"}}
+      &nbsp;&nbsp;
+      Memcached Value:<input type="text" name="memcache_value" value="{{.MemcacheValue}}"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "MemcacheValue"}}
+      <br/>
+      <br/>
+      {{if .MemcachedDatas}}
+        {{range .MemcachedDatas}}
+          <input type="text" name="memcached_list_value[]" value="{{.MemcachedValue}}"/><input type="text" name="memcached_list_remark[]"  value="{{.MemcachedRemark}}"/><br/>
+        {{end}}
+        {{template "errorsTpl" dict "Errors" .Errors "Target" "MemcachedValue"}}
+        {{template "errorsTpl" dict "Errors" .Errors "Target" "MemcachedRemark"}}
+      {{else}}
+      <input type="text" name="memcached_list_value[]" /><input type="text" name="memcached_list_remark[]" /><br/>
+      <input type="text" name="memcached_list_value[]" /><input type="text" name="memcached_list_remark[]" /><br/>
+      <input type="text" name="memcached_list_value[]" /><input type="text" name="memcached_list_remark[]" /><br/>
+      <input type="text" name="memcached_list_value[]" /><input type="text" name="memcached_list_remark[]" /><br/>
+      <input type="text" name="memcached_list_value[]" /><input type="text" name="memcached_list_remark[]" /><br/>
+      <input type="text" name="memcached_list_value[]" /><input type="text" name="memcached_list_remark[]" /><br/>
+      <input type="text" name="memcached_list_value[]" /><input type="text" name="memcached_list_remark[]" /><br/>
+      {{end}}
+      <br/>
+      <input type="submit" value="登録"/>
+    </form>
+
+{{template "footerTpl" .}}

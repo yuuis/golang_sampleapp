@@ -1,0 +1,155 @@
+{{template "headerTpl" dict "Title" "Goサンプル" "SubTitle" "TCompareAccess"}}
+<section>
+<script type="text/javascript" charset="utf-8">
+function funcBack() {
+	$("#TCompareAccessFormForBack").submit();
+}
+</script>
+<h3>検索ページ</h3>
+<h5 class="bg-secondary text-white p-2">登録変更</h5>
+<div class="container">
+  {{template "formTpl" dict "Action" "/autosample/TCompareAccess/register" "Id" "TCompareAccessFormRegister" "Mode" "register" "Token" .Token}}
+  {{template "completeTpl" dict "Status" .Status}}
+  <input type="hidden" name="sid" value="{{.Form.Sid}}" />
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">キー</div>
+    <div class="col-7 m-1">
+      <input type="text" name="key" value="{{.Form.Key}}" id="Key" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "Key" "Marking" "Key"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">設定の一意名</div>
+    <div class="col-7 m-1">
+      <input type="text" name="name" value="{{.Form.Name}}" id="Name" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "Name" "Marking" "Name"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">転送先URL</div>
+    <div class="col-7 m-1">
+      <input type="text" name="url" value="{{.Form.Url}}" id="Url" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "Url" "Marking" "Url"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">比率</div>
+    <div class="col-7 m-1">
+      <input type="text" name="percent" value="{{.Form.Percent}}" id="Percent" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "Percent" "Marking" "Percent"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">ページのエンコード</div>
+    <div class="col-7 m-1">
+      <input type="text" name="encode" value="{{.Form.Encode}}" id="Encode" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "Encode" "Marking" "Encode"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">転送か否か1:転送）</div>
+    <div class="col-7 m-1">
+      <input type="text" name="forward" value="{{.Form.Forward}}" id="Forward" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "Forward" "Marking" "Forward"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">アクセス元URL</div>
+    <div class="col-7 m-1">
+      <input type="text" name="request_url" value="{{.Form.RequestUrl}}" id="RequestUrl" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "RequestUrl" "Marking" "RequestUrl"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">転送元URL</div>
+    <div class="col-7 m-1">
+      <input type="text" name="referer_url" value="{{.Form.RefererUrl}}" id="RefererUrl" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "RefererUrl" "Marking" "RefererUrl"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">アクセス日時</div>
+    <div class="col-7 m-1">
+      <input type="text" name="access_time" value="{{.Form.AccessTime}}" id="AccessTime" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "AccessTime" "Marking" "AccessTime"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">セッションID</div>
+    <div class="col-7 m-1">
+      <input type="text" name="session_id" value="{{.Form.SessionId}}" id="SessionId" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "SessionId" "Marking" "SessionId"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">クッキー情報</div>
+    <div class="col-7 m-1">
+      <input type="text" name="cookies_key" value="{{.Form.CookiesKey}}" id="CookiesKey" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "CookiesKey" "Marking" "CookiesKey"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">金額</div>
+    <div class="col-7 m-1">
+      <input type="text" name="price" value="{{.Form.Price}}" id="Price" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "Price" "Marking" "Price"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">接続元IPアドレス</div>
+    <div class="col-7 m-1">
+      <input type="text" name="ip_address" value="{{.Form.IpAddress}}" id="IpAddress" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "IpAddress" "Marking" "IpAddress"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">削除フラグ（true:削除済み）</div>
+    <div class="col-7 m-1">
+      <input type="text" name="delete_flag" value="{{.Form.DeleteFlag}}" id="DeleteFlag" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "DeleteFlag" "Marking" "DeleteFlag"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">登録者ID</div>
+    <div class="col-7 m-1">
+      <input type="text" name="create_user_id" value="{{.Form.CreateUserId}}" id="CreateUserId" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "CreateUserId" "Marking" "CreateUserId"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">最終更新者ID</div>
+    <div class="col-7 m-1">
+      <input type="text" name="update_user_id" value="{{.Form.UpdateUserId}}" id="UpdateUserId" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "UpdateUserId" "Marking" "UpdateUserId"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">登録日</div>
+    <div class="col-7 m-1">
+      <input type="text" name="create_time" value="{{.Form.CreateTime}}" id="CreateTime" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "CreateTime" "Marking" "CreateTime"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">最終更新日</div>
+    <div class="col-7 m-1">
+      <input type="text" name="update_time" value="{{.Form.UpdateTime}}" id="UpdateTime" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "UpdateTime" "Marking" "UpdateTime"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="offset-sm-2 col-sm-10">
+      <button type="button" class="btn btn-outline-secondary col-4 center-block" id="backButton" onclick="funcBack();">戻る</button>
+      <button type="submit" class="btn btn-outline-success col-4 center-block" id="registerButton">登録</button>
+    </div>
+  </div>
+  </form>
+</div>
+
+</section>
+
+{{template "formTpl" dict "Action" "/autosample/TCompareAccess" "Id" "TCompareAccessFormForBack" "Mode" "back" "Token" .Token}}
+</form>
+
+{{template "footerTpl" .}}
+

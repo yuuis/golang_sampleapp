@@ -1,0 +1,31 @@
+{{template "headerTpl" dict "Title" "Goサンプル" "SubTitle" "単体ポストテスト"}}
+    <form action="/posttest/register" method="POST">
+      Redis Key:<input type="text" name="redis_key" value="{{.RedisKey}}"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "RedisKey"}}
+      &nbsp;&nbsp;
+      Redis Value:<input type="text" name="redis_value" value="{{.RedisValue}}"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "RedisValue"}}
+      <br/>
+      <br/>
+      Memcached Key:<input type="text" name="memcache_key" value="{{.MemcacheKey}}"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "MemcacheKey"}}
+      &nbsp;&nbsp;
+      Memcached Value:<input type="text" name="memcache_value" value="{{.MemcacheValue}}"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "MemcacheValue"}}
+      <br/>
+      <br/>
+      <input type="submit" value="登録"/>
+    </form>
+
+    <form action="/posttest/show" method="POST">
+      Redis Key:<input type="text" name="redis_key" value="{{.RedisKey}}"/>
+      <br/>
+      <br/>
+      Memcached Key:<input type="text" name="memcache_key" value="{{.MemcacheKey}}"/>
+      <br/>
+      <br/>
+      <input type="submit" value="表示"/>
+    </form>
+
+{{template "footerTpl" .}}
+

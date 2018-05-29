@@ -1,0 +1,57 @@
+{{template "headerTpl" dict "Title" "Goサンプル" "SubTitle" "RFirstConversion"}}
+<section>
+<script type="text/javascript" charset="utf-8">
+function funcBack() {
+	$("#RFirstConversionFormForBack").submit();
+}
+</script>
+<h3>検索ページ</h3>
+<h5 class="bg-secondary text-white p-2">登録変更</h5>
+<div class="container">
+  {{template "formTpl" dict "Action" "/autosample/RFirstConversion/register" "Id" "RFirstConversionFormRegister" "Mode" "register" "Token" .Token}}
+  {{template "completeTpl" dict "Status" .Status}}
+  <input type="hidden" name="sid" value="{{.Form.Sid}}" />
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">設定マスタSID<span class="text-danger">※</span></div>
+    <div class="col-7 m-1">
+      <input type="text" name="m_setting_sid" value="{{.Form.MSettingSid}}" id="MSettingSid" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "MSettingSid" "Marking" "MSettingSid"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">転送先URL</div>
+    <div class="col-7 m-1">
+      <input type="text" name="url" value="{{.Form.Url}}" id="Url" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "Url" "Marking" "Url"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">ユーザキー情報<span class="text-danger">※</span></div>
+    <div class="col-7 m-1">
+      <input type="text" name="user_key" value="{{.Form.UserKey}}" id="UserKey" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "UserKey" "Marking" "UserKey"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">初回成約SID<span class="text-danger">※</span></div>
+    <div class="col-7 m-1">
+      <input type="text" name="first_t_beacon_sid" value="{{.Form.FirstTBeaconSid}}" id="FirstTBeaconSid" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "FirstTBeaconSid" "Marking" "FirstTBeaconSid"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="offset-sm-2 col-sm-10">
+      <button type="button" class="btn btn-outline-secondary col-4 center-block" id="backButton" onclick="funcBack();">戻る</button>
+      <button type="submit" class="btn btn-outline-success col-4 center-block" id="registerButton">登録</button>
+    </div>
+  </div>
+  </form>
+</div>
+
+</section>
+
+{{template "formTpl" dict "Action" "/autosample/RFirstConversion" "Id" "RFirstConversionFormForBack" "Mode" "back" "Token" .Token}}
+</form>
+
+{{template "footerTpl" .}}
+

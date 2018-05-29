@@ -1,0 +1,155 @@
+{{template "headerTpl" dict "Title" "Goサンプル" "SubTitle" "MSettingConnectionMessage"}}
+<section>
+{{template "datatablesTpl" dict "Id" "list" "Length" "12" "Order" "1" "AscDesc" "desc"}}
+<script type="text/javascript" charset="utf-8">
+function funcGoRegister(Sid) {
+	$("#SidForRegister").val(Sid);
+	$("#MSettingConnectionMessageRegisterForm").submit();
+}
+</script>
+<h3>検索ページ</h3>
+<h5 class="bg-secondary text-white p-2">検索条件</h5>
+<div class="container">
+  {{template "formTpl" dict "Action" "/autosample/MSettingConnectionMessage" "Id" "MSettingConnectionMessageForm" "Mode" "search" "Token" .Token}}
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1"></div>
+    <div class="col-7 m-1">
+      <input type="text" name="last_compared_time_flag" value="{{.Form.LastComparedTimeFlag}}" id="LastComparedTimeFlag" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "LastComparedTimeFlag" "Marking" "LastComparedTimeFlag"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1"></div>
+    <div class="col-7 m-1">
+      <input type="text" name="last_xd_shop_time_flag" value="{{.Form.LastXdShopTimeFlag}}" id="LastXdShopTimeFlag" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "LastXdShopTimeFlag" "Marking" "LastXdShopTimeFlag"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1"></div>
+    <div class="col-7 m-1">
+      <input type="text" name="last_xd_cart_time_flag" value="{{.Form.LastXdCartTimeFlag}}" id="LastXdCartTimeFlag" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "LastXdCartTimeFlag" "Marking" "LastXdCartTimeFlag"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1"></div>
+    <div class="col-7 m-1">
+      <input type="text" name="last_convertion_time_flag" value="{{.Form.LastConvertionTimeFlag}}" id="LastConvertionTimeFlag" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "LastConvertionTimeFlag" "Marking" "LastConvertionTimeFlag"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">測定可能か否かのメッセージ</div>
+    <div class="col-7 m-1">
+      <input type="text" name="status_message" value="{{.Form.StatusMessage}}" id="StatusMessage" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "StatusMessage" "Marking" "StatusMessage"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">補足メッセージ</div>
+    <div class="col-7 m-1">
+      <input type="text" name="detail_message" value="{{.Form.DetailMessage}}" id="DetailMessage" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "DetailMessage" "Marking" "DetailMessage"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">備考メッセージ</div>
+    <div class="col-7 m-1">
+      <input type="text" name="remark_message" value="{{.Form.RemarkMessage}}" id="RemarkMessage" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "RemarkMessage" "Marking" "RemarkMessage"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">削除フラグ（true:削除済み）</div>
+    <div class="col-7 m-1">
+      <input type="text" name="delete_flag" value="{{.Form.DeleteFlag}}" id="DeleteFlag" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "DeleteFlag" "Marking" "DeleteFlag"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">登録者ID</div>
+    <div class="col-7 m-1">
+      <input type="text" name="create_user_id" value="{{.Form.CreateUserId}}" id="CreateUserId" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "CreateUserId" "Marking" "CreateUserId"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">最終更新者ID</div>
+    <div class="col-7 m-1">
+      <input type="text" name="update_user_id" value="{{.Form.UpdateUserId}}" id="UpdateUserId" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "UpdateUserId" "Marking" "UpdateUserId"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">登録日</div>
+    <div class="col-7 m-1">
+      <input type="text" name="create_time" value="{{.Form.CreateTime}}" id="CreateTime" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "CreateTime" "Marking" "CreateTime"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">最終更新日</div>
+    <div class="col-7 m-1">
+      <input type="text" name="update_time" value="{{.Form.UpdateTime}}" id="UpdateTime" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "UpdateTime" "Marking" "UpdateTime"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="offset-sm-2 col-sm-10">
+      <button type="submit" class="btn btn-outline-primary col-7 center-block" id="searchButton">検索</button>
+      <button type="button" class="btn btn-outline-success col-3 center-block" id="registerButton" onclick="funcGoRegister('');">新規作成</button>
+    </div>
+  </div>
+  </form>
+</div>
+<hr/>
+<table class="table" id="list">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">&nbsp;</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col">測定可能か否かのメッセージ</th>
+      <th scope="col">補足メッセージ</th>
+      <th scope="col">備考メッセージ</th>
+      <th scope="col">削除フラグ（true:削除済み）</th>
+      <th scope="col">登録者ID</th>
+      <th scope="col">最終更新者ID</th>
+      <th scope="col">登録日</th>
+      <th scope="col">最終更新日</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{range .List}}
+    <tr>
+      <td><a href="javascript: onclick=funcGoRegister('{{.Sid}}');">{{.Sid}}</a></td>
+      <td>{{.LastComparedTimeFlag}}</td>
+      <td>{{.LastXdShopTimeFlag}}</td>
+      <td>{{.LastXdCartTimeFlag}}</td>
+      <td>{{.LastConvertionTimeFlag}}</td>
+      <td>{{.StatusMessage}}</td>
+      <td>{{.DetailMessage}}</td>
+      <td>{{.RemarkMessage}}</td>
+      <td>{{.DeleteFlag}}</td>
+      <td>{{.CreateUserId}}</td>
+      <td>{{.UpdateUserId}}</td>
+      <td>{{.CreateTime}}</td>
+      <td>{{.UpdateTime}}</td>
+    </tr>
+    {{end}}
+  </tbody>
+</table>
+<hr/>
+
+
+</section>
+
+{{template "formTpl" dict "Action" "/autosample/MSettingConnectionMessage/register" "Id" "MSettingConnectionMessageRegisterForm" "Mode" "show" "Token" .Token}}
+<input type="hidden" name="sid" id="SidForRegister"/>
+</form>
+
+{{template "footerTpl" .}}
+

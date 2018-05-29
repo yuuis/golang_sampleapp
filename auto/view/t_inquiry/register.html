@@ -1,0 +1,113 @@
+{{template "headerTpl" dict "Title" "Goサンプル" "SubTitle" "TInquiry"}}
+<section>
+<script type="text/javascript" charset="utf-8">
+function funcBack() {
+	$("#TInquiryFormForBack").submit();
+}
+</script>
+<h3>検索ページ</h3>
+<h5 class="bg-secondary text-white p-2">登録変更</h5>
+<div class="container">
+  {{template "formTpl" dict "Action" "/autosample/TInquiry/register" "Id" "TInquiryFormRegister" "Mode" "register" "Token" .Token}}
+  {{template "completeTpl" dict "Status" .Status}}
+  <input type="hidden" name="sid" value="{{.Form.Sid}}" />
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">ユーザーマスタSID<span class="text-danger">※</span></div>
+    <div class="col-7 m-1">
+      <input type="text" name="m_user_sid" value="{{.Form.MUserSid}}" id="MUserSid" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "MUserSid" "Marking" "MUserSid"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">お問い合わせ日時</div>
+    <div class="col-7 m-1">
+      <input type="text" name="inquiry_date" value="{{.Form.InquiryDate}}" id="InquiryDate" class="form-control date"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "InquiryDate" "Marking" "InquiryDate"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">お問い合わせ分類コード</div>
+    <div class="col-7 m-1">
+      <input type="text" name="category_code" value="{{.Form.CategoryCode}}" id="CategoryCode" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "CategoryCode" "Marking" "CategoryCode"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">顧客電話番号</div>
+    <div class="col-7 m-1">
+      <input type="text" name="tel" value="{{.Form.Tel}}" id="Tel" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "Tel" "Marking" "Tel"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">顧客名</div>
+    <div class="col-7 m-1">
+      <input type="text" name="name" value="{{.Form.Name}}" id="Name" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "Name" "Marking" "Name"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">メールアドレス（顧客）</div>
+    <div class="col-7 m-1">
+      <input type="text" name="mail_address" value="{{.Form.MailAddress}}" id="MailAddress" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "MailAddress" "Marking" "MailAddress"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">問い合わせ内容<span class="text-danger">※</span></div>
+    <div class="col-7 m-1">
+      <input type="text" name="inquiry_text" value="{{.Form.InquiryText}}" id="InquiryText" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "InquiryText" "Marking" "InquiryText"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">削除フラグ（true:削除済み）</div>
+    <div class="col-7 m-1">
+      <input type="text" name="delete_flag" value="{{.Form.DeleteFlag}}" id="DeleteFlag" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "DeleteFlag" "Marking" "DeleteFlag"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">登録者ID</div>
+    <div class="col-7 m-1">
+      <input type="text" name="create_user_id" value="{{.Form.CreateUserId}}" id="CreateUserId" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "CreateUserId" "Marking" "CreateUserId"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">最終更新者ID</div>
+    <div class="col-7 m-1">
+      <input type="text" name="update_user_id" value="{{.Form.UpdateUserId}}" id="UpdateUserId" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "UpdateUserId" "Marking" "UpdateUserId"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">登録日</div>
+    <div class="col-7 m-1">
+      <input type="text" name="create_time" value="{{.Form.CreateTime}}" id="CreateTime" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "CreateTime" "Marking" "CreateTime"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">最終更新日</div>
+    <div class="col-7 m-1">
+      <input type="text" name="update_time" value="{{.Form.UpdateTime}}" id="UpdateTime" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "UpdateTime" "Marking" "UpdateTime"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="offset-sm-2 col-sm-10">
+      <button type="button" class="btn btn-outline-secondary col-4 center-block" id="backButton" onclick="funcBack();">戻る</button>
+      <button type="submit" class="btn btn-outline-success col-4 center-block" id="registerButton">登録</button>
+    </div>
+  </div>
+  </form>
+</div>
+
+</section>
+
+{{template "formTpl" dict "Action" "/autosample/TInquiry" "Id" "TInquiryFormForBack" "Mode" "back" "Token" .Token}}
+</form>
+
+{{template "footerTpl" .}}
+

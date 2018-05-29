@@ -1,0 +1,143 @@
+{{/************************ ヘッダー ************************/}}
+{{define "headerTpl"}}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="lerYVTxLaypMFaUXI3CsQsKO8G3RgYQ56Jn4KYMR">
+    <title>{{.Title}}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css"/>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment-with-locales.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ja.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">{{.Title}}</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- メニュー項目 -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- 左詰め -->
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/hello">HelloWorld</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/posttest">データポストテスト</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/listposttest">リストポストテスト</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/autosample">自動生成</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">ログイン</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">ログアウト</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-3">
+        <section>
+            <h3>{{.SubTitle}}</h3>
+            <hr/>
+{{end}}
+{{/************************ フッター ************************/}}
+{{define "footerTpl"}}
+        </section>
+    </div>
+</body>
+<script>
+$(".datetime").flatpickr({
+    "locale": "ja",
+    enableTime: true,
+    dateFormat: "Y/m/d H:i:s",
+});
+$(".date").flatpickr({
+    "locale": "ja",
+    dateFormat: "Y/m/d",
+});
+</script>
+</html>
+{{end}}
+{{/************************ エラー ************************/}}
+{{define "errorsTpl"}}
+  {{$target := .Target}}
+  {{$marking := .Marking}}
+  {{range .Errors}}
+    {{if eq $target .ErrorField}}<font color="red">{{if ne .ErrorFieldIndex 0}}{{.ErrorFieldIndex}}番目の{{end}}{{.ErrorMessage}}</font><script type="text/javascript">document.getElementById('{{$marking}}').classList.add('bg-danger');</script>{{end}}
+  {{end}}
+{{end}}
+{{/************************ フォーム ************************/}}
+{{define "formTpl"}}
+<form action="{{.Action}}" method="POST" id="{{.Id}}">
+<input type="hidden" name="mode" value="{{.Mode}}"/>
+<input type="hidden" name="token" value="{{.Token}}"/>
+
+{{end}}
+{{/************************ データテーブルス ************************/}}
+{{define "datatablesTpl"}}
+<script>
+  $(document).ready(function() {
+      $('#{{.Id}}').DataTable({
+              "bSort": true,
+              "scrollX": true,
+              "bLengthChange": true,
+              "bFilter": true,
+              "bInfo": true,
+              "order": [[{{.Order}}, '{{.AscDesc}}']],
+              "bAutoWidth": true,
+              "lengthChange": true,
+              "aLengthMenu": [[10, 25,50], [10, 25,50]],
+              "iDisplayLength": {{.Length}},
+              "paging": true,
+              "bStateSave": true,
+              "oLanguage": {
+                  "oPaginate": {
+                      "sFirst": "<< ", "sLast": " >>", "sNext": "次へ", "sPrevious": "前へ"
+                  },
+                  "sInfo": "全_TOTAL_件中 _START_件から_END_件を表示",
+                  "sLengthMenu": "表示件数： _MENU_ 件",
+                  "sInfoEmpty": "[0]件",
+                  "sZeroRecords": "データがありませんでした",
+                  "sSearch": "フィルタ：",
+                  "sInfoFiltered": ""
+              }
+      });
+  } );
+</script>
+{{end}}
+{{/************************ 完了メッセージ ************************/}}
+{{define "completeTpl"}}
+{{if eq .Status 1}}
+<div class="alert alert-success">{{.Message}}</div>
+{{else if eq .Status 2}}
+<div class="alert alert-danger">{{.Message}}</div>
+{{end}}
+{{end}}
+
+
+
+

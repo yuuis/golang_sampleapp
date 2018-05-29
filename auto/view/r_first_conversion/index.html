@@ -1,0 +1,83 @@
+{{template "headerTpl" dict "Title" "Goサンプル" "SubTitle" "RFirstConversion"}}
+<section>
+{{template "datatablesTpl" dict "Id" "list" "Length" "4" "Order" "1" "AscDesc" "desc"}}
+<script type="text/javascript" charset="utf-8">
+function funcGoRegister(Sid) {
+	$("#SidForRegister").val(Sid);
+	$("#RFirstConversionRegisterForm").submit();
+}
+</script>
+<h3>検索ページ</h3>
+<h5 class="bg-secondary text-white p-2">検索条件</h5>
+<div class="container">
+  {{template "formTpl" dict "Action" "/autosample/RFirstConversion" "Id" "RFirstConversionForm" "Mode" "search" "Token" .Token}}
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">設定マスタSID</div>
+    <div class="col-7 m-1">
+      <input type="text" name="m_setting_sid" value="{{.Form.MSettingSid}}" id="MSettingSid" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "MSettingSid" "Marking" "MSettingSid"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">転送先URL</div>
+    <div class="col-7 m-1">
+      <input type="text" name="url" value="{{.Form.Url}}" id="Url" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "Url" "Marking" "Url"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">ユーザキー情報</div>
+    <div class="col-7 m-1">
+      <input type="text" name="user_key" value="{{.Form.UserKey}}" id="UserKey" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "UserKey" "Marking" "UserKey"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">初回成約SID</div>
+    <div class="col-7 m-1">
+      <input type="text" name="first_t_beacon_sid" value="{{.Form.FirstTBeaconSid}}" id="FirstTBeaconSid" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "FirstTBeaconSid" "Marking" "FirstTBeaconSid"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="offset-sm-2 col-sm-10">
+      <button type="submit" class="btn btn-outline-primary col-7 center-block" id="searchButton">検索</button>
+      <button type="button" class="btn btn-outline-success col-3 center-block" id="registerButton" onclick="funcGoRegister('');">新規作成</button>
+    </div>
+  </div>
+  </form>
+</div>
+<hr/>
+<table class="table" id="list">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">&nbsp;</th>
+      <th scope="col">設定マスタSID</th>
+      <th scope="col">転送先URL</th>
+      <th scope="col">ユーザキー情報</th>
+      <th scope="col">初回成約SID</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{range .List}}
+    <tr>
+      <td><a href="javascript: onclick=funcGoRegister('{{.Sid}}');">{{.Sid}}</a></td>
+      <td>{{.MSettingSid}}</td>
+      <td>{{.Url}}</td>
+      <td>{{.UserKey}}</td>
+      <td>{{.FirstTBeaconSid}}</td>
+    </tr>
+    {{end}}
+  </tbody>
+</table>
+<hr/>
+
+
+</section>
+
+{{template "formTpl" dict "Action" "/autosample/RFirstConversion/register" "Id" "RFirstConversionRegisterForm" "Mode" "show" "Token" .Token}}
+<input type="hidden" name="sid" id="SidForRegister"/>
+</form>
+
+{{template "footerTpl" .}}
+

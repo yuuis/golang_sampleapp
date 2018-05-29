@@ -1,0 +1,11 @@
+{{template "headerTpl" dict "Title" "Goサンプル" "SubTitle" "単体ポストテスト"}}
+    <form action="/posttest/" method="POST">
+      Redis : {{.RedisKey}} ==&lt;{{.RedisValue}}
+      <br/>
+      <br/>
+      Memcached : {{.MemcacheKey}} ==&lt;{{.MemcacheValue}}
+      <br/>
+      <br/>
+      <a href="/posttest/">戻る</a>
+    </form>
+{{template "footerTpl" .}}

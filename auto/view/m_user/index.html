@@ -1,0 +1,290 @@
+{{template "headerTpl" dict "Title" "Goサンプル" "SubTitle" "MUser"}}
+<section>
+{{template "datatablesTpl" dict "Id" "list" "Length" "27" "Order" "1" "AscDesc" "desc"}}
+<script type="text/javascript" charset="utf-8">
+function funcGoRegister(Sid) {
+	$("#SidForRegister").val(Sid);
+	$("#MUserRegisterForm").submit();
+}
+</script>
+<h3>検索ページ</h3>
+<h5 class="bg-secondary text-white p-2">検索条件</h5>
+<div class="container">
+  {{template "formTpl" dict "Action" "/autosample/MUser" "Id" "MUserForm" "Mode" "search" "Token" .Token}}
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">ユーザID</div>
+    <div class="col-7 m-1">
+      <input type="text" name="user_id" value="{{.Form.UserId}}" id="UserId" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "UserId" "Marking" "UserId"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">パスワード</div>
+    <div class="col-7 m-1">
+      <input type="text" name="password" value="{{.Form.Password}}" id="Password" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "Password" "Marking" "Password"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">ビシネスID</div>
+    <div class="col-7 m-1">
+      <input type="text" name="business_id" value="{{.Form.BusinessId}}" id="BusinessId" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "BusinessId" "Marking" "BusinessId"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">稼働状況（true:稼働中）</div>
+    <div class="col-7 m-1">
+      <input type="text" name="active_flag" value="{{.Form.ActiveFlag}}" id="ActiveFlag" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "ActiveFlag" "Marking" "ActiveFlag"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">法人名</div>
+    <div class="col-7 m-1">
+      <input type="text" name="corporate_name" value="{{.Form.CorporateName}}" id="CorporateName" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "CorporateName" "Marking" "CorporateName"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">法人名　ふりがな</div>
+    <div class="col-7 m-1">
+      <input type="text" name="corporate_name_kana" value="{{.Form.CorporateNameKana}}" id="CorporateNameKana" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "CorporateNameKana" "Marking" "CorporateNameKana"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">部署名</div>
+    <div class="col-7 m-1">
+      <input type="text" name="department_name" value="{{.Form.DepartmentName}}" id="DepartmentName" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "DepartmentName" "Marking" "DepartmentName"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">名前（姓）</div>
+    <div class="col-7 m-1">
+      <input type="text" name="family_name" value="{{.Form.FamilyName}}" id="FamilyName" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "FamilyName" "Marking" "FamilyName"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">名前（名）</div>
+    <div class="col-7 m-1">
+      <input type="text" name="first_name" value="{{.Form.FirstName}}" id="FirstName" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "FirstName" "Marking" "FirstName"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">名前（姓）ふりがな</div>
+    <div class="col-7 m-1">
+      <input type="text" name="family_name_kana" value="{{.Form.FamilyNameKana}}" id="FamilyNameKana" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "FamilyNameKana" "Marking" "FamilyNameKana"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">名前（名）ふりがな</div>
+    <div class="col-7 m-1">
+      <input type="text" name="first_name_kana" value="{{.Form.FirstNameKana}}" id="FirstNameKana" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "FirstNameKana" "Marking" "FirstNameKana"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">郵便番号</div>
+    <div class="col-7 m-1">
+      <input type="text" name="postal_code" value="{{.Form.PostalCode}}" id="PostalCode" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "PostalCode" "Marking" "PostalCode"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">都道府県</div>
+    <div class="col-7 m-1">
+      <input type="text" name="prefecture_name" value="{{.Form.PrefectureName}}" id="PrefectureName" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "PrefectureName" "Marking" "PrefectureName"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">住所</div>
+    <div class="col-7 m-1">
+      <input type="text" name="address" value="{{.Form.Address}}" id="Address" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "Address" "Marking" "Address"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">住所２</div>
+    <div class="col-7 m-1">
+      <input type="text" name="address_2" value="{{.Form.Address2}}" id="Address2" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "Address2" "Marking" "Address2"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">電話番号</div>
+    <div class="col-7 m-1">
+      <input type="text" name="tel" value="{{.Form.Tel}}" id="Tel" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "Tel" "Marking" "Tel"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">メールアドレス</div>
+    <div class="col-7 m-1">
+      <input type="text" name="mail_address" value="{{.Form.MailAddress}}" id="MailAddress" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "MailAddress" "Marking" "MailAddress"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">リマインダ用ワンタイム</div>
+    <div class="col-7 m-1">
+      <input type="text" name="reminder_onetime" value="{{.Form.ReminderOnetime}}" id="ReminderOnetime" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "ReminderOnetime" "Marking" "ReminderOnetime"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">削除フラグ（true:削除済み）</div>
+    <div class="col-7 m-1">
+      <input type="text" name="delete_flag" value="{{.Form.DeleteFlag}}" id="DeleteFlag" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "DeleteFlag" "Marking" "DeleteFlag"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">登録者ID</div>
+    <div class="col-7 m-1">
+      <input type="text" name="create_user_id" value="{{.Form.CreateUserId}}" id="CreateUserId" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "CreateUserId" "Marking" "CreateUserId"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">最終更新者ID</div>
+    <div class="col-7 m-1">
+      <input type="text" name="update_user_id" value="{{.Form.UpdateUserId}}" id="UpdateUserId" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "UpdateUserId" "Marking" "UpdateUserId"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">登録日時</div>
+    <div class="col-7 m-1">
+      <input type="text" name="create_time" value="{{.Form.CreateTime}}" id="CreateTime" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "CreateTime" "Marking" "CreateTime"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">最終更新日時</div>
+    <div class="col-7 m-1">
+      <input type="text" name="update_time" value="{{.Form.UpdateTime}}" id="UpdateTime" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "UpdateTime" "Marking" "UpdateTime"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">コンペア開始日時</div>
+    <div class="col-7 m-1">
+      <input type="text" name="start_time" value="{{.Form.StartTime}}" id="StartTime" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "StartTime" "Marking" "StartTime"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">コンペア終了日時</div>
+    <div class="col-7 m-1">
+      <input type="text" name="end_time" value="{{.Form.EndTime}}" id="EndTime" class="form-control datetime"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "EndTime" "Marking" "EndTime"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">請求対象外フラグ（true:対象外）</div>
+    <div class="col-7 m-1">
+      <input type="text" name="not_clim_flag" value="{{.Form.NotClimFlag}}" id="NotClimFlag" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "NotClimFlag" "Marking" "NotClimFlag"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-form-label col-4 border border-dark m-1 pb-1">代理店申込コード</div>
+    <div class="col-7 m-1">
+      <input type="text" name="bpcode" value="{{.Form.Bpcode}}" id="Bpcode" class="form-control"/>
+      {{template "errorsTpl" dict "Errors" .Errors "Target" "Bpcode" "Marking" "Bpcode"}}
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="offset-sm-2 col-sm-10">
+      <button type="submit" class="btn btn-outline-primary col-7 center-block" id="searchButton">検索</button>
+      <button type="button" class="btn btn-outline-success col-3 center-block" id="registerButton" onclick="funcGoRegister('');">新規作成</button>
+    </div>
+  </div>
+  </form>
+</div>
+<hr/>
+<table class="table" id="list">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">&nbsp;</th>
+      <th scope="col">ユーザID</th>
+      <th scope="col">パスワード</th>
+      <th scope="col">ビシネスID</th>
+      <th scope="col">稼働状況（true:稼働中）</th>
+      <th scope="col">法人名</th>
+      <th scope="col">法人名　ふりがな</th>
+      <th scope="col">部署名</th>
+      <th scope="col">名前（姓）</th>
+      <th scope="col">名前（名）</th>
+      <th scope="col">名前（姓）ふりがな</th>
+      <th scope="col">名前（名）ふりがな</th>
+      <th scope="col">郵便番号</th>
+      <th scope="col">都道府県</th>
+      <th scope="col">住所</th>
+      <th scope="col">住所２</th>
+      <th scope="col">電話番号</th>
+      <th scope="col">メールアドレス</th>
+      <th scope="col">リマインダ用ワンタイム</th>
+      <th scope="col">削除フラグ（true:削除済み）</th>
+      <th scope="col">登録者ID</th>
+      <th scope="col">最終更新者ID</th>
+      <th scope="col">登録日時</th>
+      <th scope="col">最終更新日時</th>
+      <th scope="col">コンペア開始日時</th>
+      <th scope="col">コンペア終了日時</th>
+      <th scope="col">請求対象外フラグ（true:対象外）</th>
+      <th scope="col">代理店申込コード</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{range .List}}
+    <tr>
+      <td><a href="javascript: onclick=funcGoRegister('{{.Sid}}');">{{.Sid}}</a></td>
+      <td>{{.UserId}}</td>
+      <td>{{.Password}}</td>
+      <td>{{.BusinessId}}</td>
+      <td>{{.ActiveFlag}}</td>
+      <td>{{.CorporateName}}</td>
+      <td>{{.CorporateNameKana}}</td>
+      <td>{{.DepartmentName}}</td>
+      <td>{{.FamilyName}}</td>
+      <td>{{.FirstName}}</td>
+      <td>{{.FamilyNameKana}}</td>
+      <td>{{.FirstNameKana}}</td>
+      <td>{{.PostalCode}}</td>
+      <td>{{.PrefectureName}}</td>
+      <td>{{.Address}}</td>
+      <td>{{.Address2}}</td>
+      <td>{{.Tel}}</td>
+      <td>{{.MailAddress}}</td>
+      <td>{{.ReminderOnetime}}</td>
+      <td>{{.DeleteFlag}}</td>
+      <td>{{.CreateUserId}}</td>
+      <td>{{.UpdateUserId}}</td>
+      <td>{{.CreateTime}}</td>
+      <td>{{.UpdateTime}}</td>
+      <td>{{.StartTime}}</td>
+      <td>{{.EndTime}}</td>
+      <td>{{.NotClimFlag}}</td>
+      <td>{{.Bpcode}}</td>
+    </tr>
+    {{end}}
+  </tbody>
+</table>
+<hr/>
+
+
+</section>
+
+{{template "formTpl" dict "Action" "/autosample/MUser/register" "Id" "MUserRegisterForm" "Mode" "show" "Token" .Token}}
+<input type="hidden" name="sid" id="SidForRegister"/>
+</form>
+
+{{template "footerTpl" .}}
+
