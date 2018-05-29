@@ -1,17 +1,56 @@
 {{template "headerTpl" dict "Title" "GoLang" "SubTitle" "login"}}
   {{template "completeTpl" .}}
-  <form action="/loginpost" method="post">
+  <!-- <form action="/loginpost" method="post"> -->
+  <div id="result"></div>
+  <form>
     <div class="form-group">
       <div>
       <label for="email">name</label>
-      <input type="text" id="name" name="username">
+      <input type="text" class="form-control" id="name" name="username" placeholder="name">
       </div><br>
-
       <div>
       <label for="password">password</label>
-      <input type="password" id="password" name="password">
+      <input type="password" class="form-control" id="password" name="password" placeholder="password">
       </div>
     </div>
-    <input type="submit" class="btn btn-primary" value="送信">
+    <input type="submit" class="btn btn-primary" id="button" value="送信">
   </form>
+  <script type="text/javascript">
+    let button = document.getElementById("button");
+    button.addEventListener("click", login, false);
+
+    function login() {
+      let name = document.getElementById("name").value;
+      let password = document.getElementById("password").value;
+      let result = document.getElementById("result");
+      let xhr = new XMLHttpRequest();
+
+      xhr.open("POST", "/loginasynchronous", true);
+      xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded;charset=UTF-8');
+      xhr.send("name="+encodeURIComponent(name) + "&password="+encodeURIComponent(password));
+
+      xhr.onreadystatechange = function() {
+        switch (xhr.readyState) {
+          case 4: 
+            if(xhr.status == 200) {
+              let data = xhr.responseText;
+              if(data === "success") {
+                let message = document.createElement("div");
+                message.className = "alert alert-success";
+                message.innerHTML = "login success";
+                result.appendChild(message);
+              } else {
+                let message = document.createElement("div");
+                message.className = "alert alert-danger";
+                message.innerHTML = "login faild";
+                result.appendChild(message);
+              }
+            } else {
+              alert("Failed " + xhr.status);
+            }
+            break;
+          }
+      };
+    }
+  </script>
 {{template "footerTpl" .}}

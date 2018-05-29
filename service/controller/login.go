@@ -4,6 +4,7 @@ import (
   "net/http"
   "html/template"
   "log"
+  "fmt"
   "../dto"
   "../data"
   "../common"
@@ -32,12 +33,11 @@ func GetLoginViewHandler(w http.ResponseWriter, r *http.Request) {
 
 func PostLoginViewHandler(w http.ResponseWriter, r *http.Request) {
   common.WriteLog(config.DEBUG, "login", r)
-  r.ParseForm()
 
   if r.Method == "POST" {
     // フォーム入力情報からUserForm型を作成
-    username := r.Form["username"][0]
-    user := dto.UserForm{username, r.Form["password"][0]}
+    username := r.FormValue("name")
+    user := dto.UserForm{username, r.FormValue("password")}
     page := new(Page)
     var tmpl *template.Template
     var err error 
@@ -85,23 +85,28 @@ func PostLoginViewHandler(w http.ResponseWriter, r *http.Request) {
   }
 }
 
+func LoginAsynchronousViewHandler(w http.ResponseWriter, r *http.Request) {
+  common.WriteLog(config.DEBUG, "loginasynchronous", r)
+  log.Println(r.FormValue("name"))
+  log.Println(r.FormValue("password"))
+
+  user := dto.UserForm{r.FormValue("name"), r.FormValue("password")}
+  ok, err := logic.Authenticate(user)
+  if err != nil {
+    common.WriteErrorLog(config.DEBUG, err, nil)
+  }
+  if ok {
+    // ログイン成功
+    // ここでコケてる
+    data.SetStringSession(w, r, "user", r.FormValue("name"))
+    fmt.Fprintf(w, "success")
+  } else {
+    // ログイン失敗
+    fmt.Fprintf(w, "faild")
+  } 
+}
+
 func LogoutViewHandler(w http.ResponseWriter, r *http.Request) {
-  // user := data.GetStringSession(r, "user")
-  // if user != "" {
-    data.SetStringSession(w, r, "user", "")
-    log.Println("hoge")
-  // }
-  // GetLoginViewHandler(w, r)
-  page := new(Page)
-  page.Title = "login"
-
-  tmpl, err := common.ViewParses("./view/login/login.html")
-  if err != nil {
-    common.WriteErrorLog(config.DEBUG, err, nil)
-  }
-
-  err = tmpl.Execute(w, page)
-  if err != nil {
-    common.WriteErrorLog(config.DEBUG, err, nil)
-  }
+  data.SetStringSession(w, r, "user", "")
+  GetLoginViewHandler(w, r)
 }

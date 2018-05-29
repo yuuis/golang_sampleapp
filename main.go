@@ -31,12 +31,11 @@ func authenticate(fn http.HandlerFunc) http.HandlerFunc {
 
 		user := data.GetStringSession(r, "user")
 		log.Println(r.URL.Path)
-		if user != "" || r.URL.Path == "/loginpost" || r.URL.Path == "/login"{
+		if user != "" || r.URL.Path == "/loginpost" || r.URL.Path == "/loginasynchronous" || r.URL.Path == "/login"{
 			fn(w, r)
 		} else {
 			controller.GetLoginViewHandler(w, r)
 		}
-
 
 		log.Println("after process") // 処理の後の共通処理
 	}
@@ -59,8 +58,9 @@ func main() {
 
 	// login
 	http.HandleFunc("/login", authenticate(controller.GetLoginViewHandler))
-  	http.HandleFunc("/loginpost", authenticate(controller.PostLoginViewHandler))
-  	http.HandleFunc("/logout", authenticate(controller.LogoutViewHandler))
+  http.HandleFunc("/loginpost", authenticate(controller.PostLoginViewHandler))
+  http.HandleFunc("/loginasynchronous", authenticate(controller.LoginAsynchronousViewHandler))
+  http.HandleFunc("/logout", authenticate(controller.LogoutViewHandler))
 
 	// fileupload
 	http.HandleFunc("/fileupload", authenticate(controller.FileUploadIndexViewHandler))
