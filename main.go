@@ -30,14 +30,16 @@ func authenticate(fn http.HandlerFunc) http.HandlerFunc {
 		log.Println("before process") // 処理の前の共通処理
 
 		user := data.GetStringSession(r, "user")
+		log.Println("pre_sessioon: " + user)
 		log.Println(r.URL.Path)
-		if user != "" || r.URL.Path == "/loginpost" || r.URL.Path == "/loginasynchronous" || r.URL.Path == "/login"{
+		if user != "" || r.URL.Path == "/loginasynchronous" || r.URL.Path == "/login"{
 			fn(w, r)
 		} else {
 			controller.GetLoginViewHandler(w, r)
 		}
 
 		log.Println("after process") // 処理の後の共通処理
+		log.Println("session: " + data.GetStringSession(r, "user"))
 	}
 }
 
@@ -64,21 +66,17 @@ func main() {
 
 	// fileupload
 	http.HandleFunc("/fileupload", authenticate(controller.FileUploadIndexViewHandler))
-	http.HandleFunc("/fileupload/", authenticate(controller.FileUploadIndexViewHandler))
 	http.HandleFunc("/fileupload/register", authenticate(controller.FileUploadRegisterViewHandler))
 
 	// postest
 	http.HandleFunc("/posttest", authenticate(controller.PostTestIndexViewHandler))
-	http.HandleFunc("/posttest/", authenticate(controller.PostTestIndexViewHandler))
 	http.HandleFunc("/posttest/register", authenticate(controller.PostTestRegisterViewHandler))
 	http.HandleFunc("/posttest/show", authenticate(controller.PostTestShowViewHandler))
 
 	// listpostest
 	http.HandleFunc("/listposttest", authenticate(controller.ListPostTestIndexViewHandler))
-	http.HandleFunc("/listposttest/", authenticate(controller.ListPostTestIndexViewHandler))
 	http.HandleFunc("/listposttest/register", authenticate(controller.ListPostTestRegisterViewHandler))
 	http.HandleFunc("/listposttest/show", authenticate(controller.ListPostTestShowViewHandler))
-
 
 	// 最後に/をつけるとワイルドカードになる
 

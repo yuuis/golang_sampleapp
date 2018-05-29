@@ -87,9 +87,8 @@ func PostLoginViewHandler(w http.ResponseWriter, r *http.Request) {
 
 func LoginAsynchronousViewHandler(w http.ResponseWriter, r *http.Request) {
   common.WriteLog(config.DEBUG, "loginasynchronous", r)
-  log.Println(r.FormValue("name"))
-  log.Println(r.FormValue("password"))
-
+  log.Println("name: " + r.FormValue("name"))
+  log.Println("password: " + r.FormValue("password"))
   user := dto.UserForm{r.FormValue("name"), r.FormValue("password")}
   ok, err := logic.Authenticate(user)
   if err != nil {
@@ -97,12 +96,11 @@ func LoginAsynchronousViewHandler(w http.ResponseWriter, r *http.Request) {
   }
   if ok {
     // ログイン成功
-    // ここでコケてる
     data.SetStringSession(w, r, "user", r.FormValue("name"))
-    fmt.Fprintf(w, "success")
+    fmt.Fprint(w, "success")
   } else {
     // ログイン失敗
-    fmt.Fprintf(w, "faild")
+    fmt.Fprint(w, "faild")
   } 
 }
 

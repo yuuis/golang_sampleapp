@@ -1,12 +1,11 @@
 {{template "headerTpl" dict "Title" "GoLang" "SubTitle" "login"}}
   {{template "completeTpl" .}}
-  <!-- <form action="/loginpost" method="post"> -->
   <div id="result"></div>
-  <form>
+
     <div class="form-group">
       <div>
       <label for="email">name</label>
-      <input type="text" class="form-control" id="name" name="username" placeholder="name">
+      <input type="text" class="form-control" id="name" name="name" placeholder="name">
       </div><br>
       <div>
       <label for="password">password</label>
@@ -14,7 +13,7 @@
       </div>
     </div>
     <input type="submit" class="btn btn-primary" id="button" value="送信">
-  </form>
+
   <script type="text/javascript">
     let button = document.getElementById("button");
     button.addEventListener("click", login, false);
@@ -46,7 +45,7 @@
                 result.appendChild(message);
               }
             } else {
-              alert("Failed " + xhr.status);
+              console.log("Failed status = " + xhr.status);
             }
             break;
           }
