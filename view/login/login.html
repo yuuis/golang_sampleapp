@@ -32,8 +32,8 @@
         switch (xhr.readyState) {
           case 4: 
             if(xhr.status == 200) {
-              let data = xhr.responseText;
-              if(data === "success") {
+              let data = JSON.parse(xhr.responseText);
+              if(data["result"] === "success") {
                 let message = document.createElement("div");
                 message.className = "alert alert-success";
                 message.innerHTML = "login success";
@@ -41,7 +41,7 @@
               } else {
                 let message = document.createElement("div");
                 message.className = "alert alert-danger";
-                message.innerHTML = "login faild";
+                message.innerHTML = data["error"];
                 result.appendChild(message);
               }
             } else {
